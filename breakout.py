@@ -33,10 +33,10 @@ pygame.display.set_icon(icon)
 # mouse disappear when over our window game
 pygame.mouse.set_visible(0)
 
-all_sprites_list = pygame.sprite.Group()  # list with all sprites we need(use)
+all_sprites_list = pygame.sprite.Group()     # list with all sprites we need(use)
 
 # create the Paddle
-paddle = Paddle(BROWN, 100, 20)  # paddle = new Paddle start draw point  x and y
+paddle = Paddle(BROWN, 100, 20)              # paddle = new Paddle start draw point  x and y
 paddle.rect.x = 350
 paddle.rect.y = 560
 
@@ -159,8 +159,8 @@ while carryOn:
     if pygame.sprite.collide_mask(ball, paddle):  # collision/detection between two sprites,
         ball.rect.x -= ball.velocity[0]
         ball.rect.y -= ball.velocity[1]
-        ball.bounce()
-        
+        ball.bounce2()
+
         # ball.rect.y -= ball.velocity[1]
         # ball.bounce()
 
@@ -177,22 +177,22 @@ while carryOn:
             pygame.display.flip()
             pygame.time.wait(3000)
 
-            carryOn = False  # stop the game
+            carryOn = False                                         # stop the game
 
     # draw
     # Background Image
     screen.blit(background, (0, 0))
     # screen.fill(DARKBLUE)
-    pygame.draw.line(screen, WHITE, [0, 38], [800, 38], 3)  # draw line color ... from x,y to x,y , stroke weight
+    pygame.draw.line(screen, WHITE, [0, 38], [800, 38], 3)          # draw line color ... from x,y to x,y , stroke weight
 
     # score and number of lives on top screen
-    font = pygame.font.Font(None, 34)  # create a Font object
-    text = font.render("Score: " + str(score), 1, WHITE)  # draw text "", edges(smooth), color
-    screen.blit(text, (20, 10))  # draw text on screen position x and y
+    font = pygame.font.Font(None, 34)                               # create a Font object
+    text = font.render("Score: " + str(score), 1, WHITE)            # draw text "", edges(smooth), color
+    screen.blit(text, (20, 10))                                     # draw text on screen position x and y
     text = font.render("Lives: " + str(lives), 1, WHITE)
     screen.blit(text, (650, 10))
 
-    all_sprites_list.draw(screen)  # draw sprites
+    all_sprites_list.draw(screen)                                   # draw sprites
 
     # update screen (whai is in draw function)(loop)
     pygame.display.flip()

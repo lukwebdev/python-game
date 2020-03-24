@@ -1,8 +1,8 @@
-import pygame  # import the pygame library and initialise the game engine(init)
+import pygame                               # import the pygame library and initialise the game engine(init)
 
-from paddle import Paddle       # import the Paddle Class
-from ball import Ball           # import the Ball Class
-from brick import Brick         # import the Brick Class
+from paddle import Paddle                   # import the Paddle Class
+from ball import Ball                       # import the Ball Class
+from brick import Brick                     # import the Brick Class
 
 pygame.init()
 
@@ -30,15 +30,14 @@ pygame.display.set_caption("Breakout by LB")
 icon = pygame.image.load('images/icon.png')
 pygame.display.set_icon(icon)
 
-# mouse disappear when over our window game
-pygame.mouse.set_visible(0)
+pygame.mouse.set_visible(0)                     # mouse disappear when over our window game
 
-all_sprites_list = pygame.sprite.Group()     # list with all sprites we need(use)
+all_sprites_list = pygame.sprite.Group()        # list with all sprites we need(use)
 
 # create the Paddle
-paddle = Paddle(BROWN, 100, 20)              # paddle = new Paddle start draw point  x and y
+paddle = Paddle(BROWN, 100, 20)                 # paddle = new Paddle start draw point  x and y
 paddle.rect.x = 350
-paddle.rect.y = 560
+paddle.rect.y = 570
 
 # create the ball
 ball = Ball(WHITE, 10, 10)
@@ -105,26 +104,25 @@ for i in range(9):
     all_sprites_list.add(brick)
     all_bricks.add(brick)
 
-all_sprites_list.add(paddle)  # add the paddle to the list of sprites
-all_sprites_list.add(ball)  # add the ball to the list of sprites
+all_sprites_list.add(paddle)                    #add the paddle to the list of sprites
+all_sprites_list.add(ball)                      #add the ball to the list of sprites
 
-# game will be on till exit (loop)
-carryOn = True
 
-# screen update - refresh per sec
-clock = pygame.time.Clock()
+carryOn = True                                  #game will be on till exit (loop)
+
+clock = pygame.time.Clock()                     #screen update - refresh per sec
 
 # MAIN PROGRAM (loop)
 while carryOn:
     # main event (loop)
-    for event in pygame.event.get():  # do something
-        if event.type == pygame.QUIT:  # if exit game close X
-            carryOn = False  # exit game (finish loop)
+    for event in pygame.event.get():            #do something
+        if event.type == pygame.QUIT:           #if exit game close X
+            carryOn = False                     #exit game (finish loop)
 
     # moving the paddle by arrow keys left or right when button is pressed
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
-        paddle.moveLeft(20)  # by ... pixels
+        paddle.moveLeft(20)                     #by ... pixels
     if keys[pygame.K_RIGHT]:
         paddle.moveRight(20)
 
@@ -136,7 +134,7 @@ while carryOn:
         ball.velocity[0] = -ball.velocity[0]    # * -1 ??
     if ball.rect.x <= 0:
         ball.velocity[0] = -ball.velocity[0]
-    if ball.rect.y > 590:                       #if position ball is less than 590 y lives -1 and reset posiotion of ball to x and y posiotion
+    if ball.rect.y > 580:                       #if position ball is less than 580 y lives -1 and reset posiotion of ball to x and y posiotion
         ball.velocity[1] = -ball.velocity[1]
         lives -= 1
         pygame.time.wait(200)
@@ -150,7 +148,7 @@ while carryOn:
             pygame.display.flip()
             pygame.time.wait(3000)
 
-            carryOn = False  # stop the game
+            carryOn = False                     #stop the game
 
     if ball.rect.y < 40:
         ball.velocity[1] = -ball.velocity[1]
@@ -160,9 +158,6 @@ while carryOn:
         ball.rect.x -= ball.velocity[0]
         ball.rect.y -= ball.velocity[1]
         ball.bounce2()
-
-        # ball.rect.y -= ball.velocity[1]
-        # ball.bounce()
 
     brick_collision_list = pygame.sprite.spritecollide(ball, all_bricks, False)
     for brick in brick_collision_list:

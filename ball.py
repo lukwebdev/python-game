@@ -23,16 +23,16 @@ class Ball(pygame.sprite.Sprite):
         self.rect.x += self.velocity[0] #move ball x
         self.rect.y += self.velocity[1] #move ball y
         if self.rect.y == 0:            #remove 0 from y moving ball 
-            self.rect.y = -1
+            self.rect.y = randint(-8, -2)
 
     def bounce(self):
         self.velocity[0] = -self.velocity[0]        #if bounce change vector x for -x
         self.velocity[1] = randint(-9, 8)           #if bounce change vector y for y
 
         if self.velocity[1] == 0:                   #remove 0 from y moving ball 
-            self.velocity[1] = randint(-8, -1)
+            self.velocity[1] = randint(-8, -2)
 
 # remove 0 from colision ball paddle
     def bounce2(self):
         self.velocity[0] = -self.velocity[0]        #if bounce change vector x for -x
-        self.velocity[1] = randint(-8, -1)          #if bounce change vector y for y
+        self.velocity[1] = randint(-8, -2)          #if bounce change vector y for y
